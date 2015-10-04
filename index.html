@@ -1,23 +1,73 @@
 <html lang="en">
   <head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style>
+html, body, header, footer, div, section {
+  margin: 0;
+  padding: 0;
+  font-size: 29px;
+}
+
+header {
+  text-align: center;
+}
+
+header {
+  background: #faa;
+}
+
+div {
+  padding-top: 50%;
+  margin-left: 10%;
+  width: 80%;
+  transform: translateY(-50%);
+}
+    </style>
+    <script>
+      $(function () {
+        var i = 0;
+        $('div').hide();
+        $('div').eq(i).show();
+
+        var next = function() {
+          if ( i === $('div').length - 1 ) return;
+          $('div').hide().eq(++i).show();
+        }
+        var prev = function() {
+          if ( i === 0 ) return;
+          $('div').hide().eq(--i).show();
+        }
+        $(document).on('keydown', function (e) {
+          if ( e.keyCode === 32 || e.keyCode === 39 ) next();
+          if ( e.keyCode === 37 ) prev();
+        });
+      });
+    </script>
   </head>
   <body>
-    <div class="header-notice">
+    <header class="header-notice">
       Please open http://xxxxxx to join 2nd demo. iOS Safari is better.
-    </div>
+    </header>
     <section>
       <div>
       <h1>Self Introduce</h1>
       Akira Sawada aka aklaswad. call me just AK.
+      </div>
+      <div>
       from Peatix http://peatix.com/
       Peatix is an online ticketing service. NewYork, Tokyo, Singapore.
       </div>
       <div>
-      Agenda
-      2 demos
-        Sonificator (2011)
-        Qyarts (2013-)
-      Thoughts
+        <h2>Agenda</h2>
+        <ul>
+          <li>2 demos
+          <ul>
+            <li>Sonificator (2011)</li>
+            <li>Qyarts (2013-)</li>
+          </ul>
+          </li>
+          <li>Thoughts</li>
+        </ul>
       </div>
     </section>
     <section>
