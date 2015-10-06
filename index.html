@@ -5,15 +5,42 @@
 html, body, header, footer, div, section {
   margin: 0;
   padding: 0;
-  font-size: 29px;
+  font-size: 33px;
+  font-family: 'Avenir Next','Lucida Grande',
+ 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
+ Meiryo, メイリオ, sans-serif;
+
+}
+
+body {
+  background: #fff;
+  color: #345;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+h1,h2,h3 {
+  font-weight: normal;
+}
+
+div {
+  position: absolute;
+  left: 0;
 }
 
 header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  font-size: 28px;
   text-align: center;
+  background: #000;
+  color: #abc;
 }
 
-header {
-  background: #faa;
+a, a:visited {
+  color: #345;
 }
 
 div {
@@ -28,14 +55,22 @@ div {
         var i = 0;
         $('div').hide();
         $('div').eq(i).show();
-
+        var animationOption = { easing: "linear", duration: 500 };
         var next = function() {
           if ( i === $('div').length - 1 ) return;
-          $('div').hide().eq(++i).show();
+          var $current = $('div').eq(i);
+          var $next = $('div').eq(++i);
+          $current.fadeOut({ duration: 400, easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          $next.fadeIn({ duration: 400,     easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          if ( $next.hasClass('header-switch') ) $('header').slideUp();
         }
         var prev = function() {
           if ( i === 0 ) return;
-          $('div').hide().eq(--i).show();
+          var $current = $('div').eq(i);
+          var $next = $('div').eq(--i);
+          $current.fadeOut({ duration: 400, easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          $next.fadeIn({ duration: 400,     easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          if ( $current.hasClass('header-switch') ) $('header').slideDown();
         }
         $(document).on('keydown', function (e) {
           if ( e.keyCode === 32 || e.keyCode === 39 ) next();
@@ -46,42 +81,49 @@ div {
   </head>
   <body>
     <header class="header-notice">
-      Please open http://xxxxxx to join 2nd demo. iOS Safari is better.
+      Please open http://xxxxxx for help my 2nd demo. iOS Safari is better.
     </header>
     <section>
       <div>
-      <h1>Self Introduce</h1>
-      Akira Sawada aka aklaswad. call me just AK.
+      <h1>Web x Music | Music x Web</h1>
       </div>
       <div>
-      from Peatix http://peatix.com/
+      <h1>About me</h1>
+      Akira Sawada aka aklaswad.<br />please call me Akira, or Sawada, or just <b>AK</b>.
+      </div>
+      <div>
+      from Peatix <a href="http://peatix.com/">http://peatix.com</a><br />
       Peatix is an online ticketing service. NewYork, Tokyo, Singapore.
       </div>
       <div>
         <h2>Agenda</h2>
         <ul>
-          <li>2 demos
+          <li>2 demos from my works
           <ul>
             <li>Sonificator (2011)</li>
             <li>Qyarts (2013-)</li>
           </ul>
           </li>
-          <li>Thoughts</li>
+          <li>Thoughts about future of web music</li>
         </ul>
       </div>
     </section>
     <section>
       <div>
       <h1>Sonificator</h1>
-      A bookmarklet play webpages - Liken DOM structure to music score
-      http://sonificator.com/
+      A bookmarklet plays webpages - Liken DOM structure to music score<br />
+      <a href="http://sonificator.com/">http://sonificator.com/</a>
       </div>
       <div>
       (demo)
-      NOTE: Don't look at source code; it's written at the era Web Audio API has only JavaScript Node ;)
+      </div>
+      <div>
+      NOTE: Don't look at source code;<br />It's written at the era Web Audio API has only JavaScript Node ;)
       </div>
       <div>
       Data Driven Composition - An Alternative to Algorithmic Composition
+      </div>
+      <div>
       The Fact -- today we can access to tons of random and/or structured data
       </div>
     </section>
@@ -92,9 +134,10 @@ div {
       Based on Peatix ColorSync technorogy.
       </div>
       <div>
-      Had secret test at Live sessions' reception in TodaysArtTokyo
+      Had secret test at Live sessions' reception in TodaysArtTokyo<br />
+      ( Morton Subotnick, NONOTAK and Jeff Mills )
       </div>
-      <div>
+      <div class="header-switch">
       (demo)
       </div>
       <div>
@@ -104,6 +147,8 @@ div {
     <section>
       <div>
       <h1>Thoughts</h1>
+      </div>
+      <div>
       Honestly, am sick of JavaScript versions of Csound, Max/MSP, SuperColider, etc...
       </div>
       <div>
@@ -113,10 +158,10 @@ div {
       What I want is music.
       </div>
       <div>
-      music which never been until Web Music Technorogies has born.
+      music which could never been until Web Music Technorogies has born.
       </div>
       <div>
-      Web Music technorogies can change web site experiences.
+      As you know, Web Music technorogies can change web site experiences.
       </div>
       <div>
       Is it enough?
@@ -125,7 +170,10 @@ div {
       Web Music has possibilities to enpower music experiences.
       </div>
       <div>
-      I believe Web Music can change music itself.
+      I believe Web Music can change music experiences.
+      </div>
+      <div>
+      I believe Web Music can change the history of music.
       </div>
       <div>
       Be artist. Be musician.
