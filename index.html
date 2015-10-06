@@ -52,27 +52,50 @@ div {
     </style>
     <script>
       $(function () {
-        var i = 0;
+        var begin = location.hash.replace(/[^0-9]/g,'');
+
+        var i = begin && parseInt(begin) ? parseInt(begin) : 0;
         $('div').hide();
         $('div').eq(i).show();
-        var blurLevel = 12;
+        var blurLevel = 10;
         var duration = 800;
+
+        $(window).on('hashchange', function() {
+          var begin = location.hash.replace(/[^0-9]/g,'');
+          var next = begin && parseInt(begin) ? parseInt(begin) : 0;
+          prevnext(i, next);
+        });
+
         var next = function() {
           if ( i === $('div').length - 1 ) return;
-          var $current = $('div').eq(i);
-          var $next = $('div').eq(++i);
-          $current.fadeOut({ duration: duration, easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
-          $next.fadeIn({ duration: duration,     easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          var $next = $('div').eq(i+1);
+          location.hash = i+1;
           if ( $next.hasClass('header-switch') ) $('header').slideUp();
-        }
+        };
+
         var prev = function() {
           if ( i === 0 ) return;
           var $current = $('div').eq(i);
-          var $next = $('div').eq(--i);
-          $current.fadeOut({ duration: duration, easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
-          $next.fadeIn({ duration: duration,     easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          location.hash = i-1;
           if ( $current.hasClass('header-switch') ) $('header').slideDown();
-        }
+        };
+
+        var prevnext = function ( current, next ) {
+          var $current = $('div').eq(current);
+          var $next = $('div').eq(next);
+          $current.fadeOut({
+            duration: duration,
+            easing: 'swing',
+            step: function (step) {
+              $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          $next.fadeIn({
+            duration: duration,
+            easing: 'linear',
+            step: function (step) {
+              $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          i = next;
+        };
+
         $(document).on('keydown', function (e) {
           if ( e.keyCode === 32 || e.keyCode === 39 ) next();
           if ( e.keyCode === 37 ) prev();
@@ -100,7 +123,7 @@ div {
       <div>
         <h2>Agenda</h2>
         <ul>
-          <li>2 demos from my perfonal works
+          <li>2 demos from my personal works
           <ul>
             <li>Sonificator (2011)</li>
             <li>Qyarts (2013-)</li>
