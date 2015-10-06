@@ -55,21 +55,22 @@ div {
         var i = 0;
         $('div').hide();
         $('div').eq(i).show();
-        var animationOption = { easing: "linear", duration: 500 };
+        var blurLevel = 12;
+        var duration = 800;
         var next = function() {
           if ( i === $('div').length - 1 ) return;
           var $current = $('div').eq(i);
           var $next = $('div').eq(++i);
-          $current.fadeOut({ duration: 400, easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
-          $next.fadeIn({ duration: 400,     easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          $current.fadeOut({ duration: duration, easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          $next.fadeIn({ duration: duration,     easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
           if ( $next.hasClass('header-switch') ) $('header').slideUp();
         }
         var prev = function() {
           if ( i === 0 ) return;
           var $current = $('div').eq(i);
           var $next = $('div').eq(--i);
-          $current.fadeOut({ duration: 400, easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
-          $next.fadeIn({ duration: 400,     easing: 'linear', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseInt( 8 - step * 8 ) + 'px)') }});
+          $current.fadeOut({ duration: duration, easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
+          $next.fadeIn({ duration: duration,     easing: 'swing', step: function (step) { $(this).css('-webkit-filter', 'blur(' + parseFloat( blurLevel - step * blurLevel ) + 'px)') }});
           if ( $current.hasClass('header-switch') ) $('header').slideDown();
         }
         $(document).on('keydown', function (e) {
@@ -92,9 +93,9 @@ div {
       Akira Sawada aka aklaswad.<br />please call me Akira, or Sawada, or just <b>AK</b>.
       </div>
       <div>
-      from Peatix <a href="http://peatix.com/">http://peatix.com</a><br />
+      from Peatix <a href="http://peatix.com/">http://peatix.com/</a><br />
       Peatix is an online ticketing service. NewYork, Tokyo, Singapore.
-      <img src="peatix.png" width="80%" />
+      <img src="peatix.png" width="100%" />
       </div>
       <div>
         <h2>Agenda</h2>
@@ -111,7 +112,7 @@ div {
     </section>
     <section>
       <div>
-      <h1>Sonificator</h1>
+      <h1>Sonificator (2011)</h1>
       A bookmarklet plays webpages - Liken DOM structure to music score<br />
       <a href="http://sonificator.com/">http://sonificator.com/</a>
       </div>
@@ -130,11 +131,15 @@ div {
     </section>
     <section>
       <div>
-      <h1>Qyarts</h1>
+      <h1>Qyarts (2013-)</h1>
+      <ul>
+        <li>Quite Yet Another RealTime Sequencer</li>
+        <li>QY Ain't RealTime Sequencer</li>
+      </ul>
       A System which Synchronize multiple devices and play one song together.
       </div>
       <div>
-      Based on | Spined off from Peatix ColorSync technorogy.
+      (Based on | Spined off from) Peatix ColorSync technorogy.
       </div>
       <div>
       Had secret test at Live sessions' reception in TodaysArtTokyo<br />
@@ -155,13 +160,13 @@ div {
       Honestly, am sick of JavaScript versions of Csound, Max/MSP, SuperColider, etc...
       </div>
       <div>
-      am sick of Any clones of T*-(303|808|909), ChaosPad, Tenorion, etc...
+      Am sick of Any clones of old school Synthesizers, T*-(303|808|909), ChaosPad, Tenorion, REAKTOR, etc...
       </div>
       <div>
       What I want is music.
       </div>
       <div>
-      music which could never been w/o Web Music Technorogies.
+      Music which could never been w/o Web Music Technorogies.
       </div>
       <div>
       As you know, Web Music technorogies can change web site experiences.
@@ -179,7 +184,7 @@ div {
       Web Music can change the history of music.
       </div>
       <div>
-      Be artist. Be musician.
+      Be musician.
       </div>
       <div>
       Thank you.
